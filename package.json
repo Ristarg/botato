@@ -1,0 +1,22 @@
+{
+  "name": "botato",
+  "version": "0.0.0",
+  "description": "Discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ristarg/botato.git"
+  },
+  "author": "Yuurai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ristarg/botato/issues"
+  },
+  "homepage": "https://github.com/Ristarg/botato#readme",
+  "dependencies": {
+    "discord.js": "^11.3.2"
+  }
+}
