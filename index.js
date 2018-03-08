@@ -4,11 +4,13 @@ const readline = require('readline')
 
 const Discord = require("discord.js")
 const client = new Discord.Client()
-
 const token = 'NDE2MTAwMDQ1NDY1NzE0Njg4.DYJQyQ.AsCItJ0AxCaIhTlX15tLq-yCFws'
+
 const prefix = 'b@@'
 
 const questions = {}
+
+//TODO: refactor out any command functionality, only leave connection, setup and dispatch
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
@@ -18,10 +20,10 @@ client.on('ready', () => {
   const rl = readline.createInterface({
     input: fs.createReadStream(path.join(__dirname, '/questions/deep.txt')),
     crlfDelay: Infinity
-  });
+  })
 
   rl.on('line', (line) => {
-    questions.deep.push(line);
+    questions.deep.push(line)
   })
 })
 
