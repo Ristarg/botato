@@ -1,3 +1,5 @@
+const { pickRandom } = require('../util')
+
 class Question {
     constructor() {
         this.questions = {}
@@ -9,9 +11,8 @@ class Question {
 
     execute(msg, args) {
         const deck = (args.length > 1) ? args[1] : 'starter'
-        msg.channel.send(this.questions[deck][Math.floor(Math.random() * this.questions[deck].length)])
+        msg.channel.send(pickRandom(this.questions[deck]))
     }
-
 }
 
 module.exports = Question
