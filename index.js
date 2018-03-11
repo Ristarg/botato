@@ -1,5 +1,5 @@
 // Discord.js prelude
-const Discord = require("discord.js")
+const Discord = require('discord.js')
 const client = new Discord.Client()
 
 // utility prelude
