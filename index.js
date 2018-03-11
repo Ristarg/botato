@@ -1,34 +1,34 @@
-const fs = require('fs')
-const path = require('path')
-const readline = require('readline')
-
+// Discord.js prelude
 const Discord = require("discord.js")
 const client = new Discord.Client()
 
-const config = require('./config.json')
+// utility prelude
+const { log, assertConfig } = require('./util')
 
-const questions = {}
+const configPath = './config.json'
+if (!assertConfig(configPath))
+    process.exit(1)
+const config = require(configPath)
 
-//TODO: refactor out any command functionality, only leave connection, setup and dispatch
-//TODO: if no config exists, generate template config
-//TODO: add logging
+// modules prelude
+const question = new(require('./question/question'))()
+
+//TODO: TESTS TESTS TESTS
 
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`)
-
-  questions.starter = require('./questions/starter.json')
-  questions.deep = require('./questions/deep.json')
+    log(`Logged in as ${client.user.tag}!`)
 })
 
 client.on('message', msg => {
-  if (msg.author.bot || !msg.content.startsWith(config.prefix)) return
+    if (!msg.content.startsWith(config.prefix) || msg.author.bot)
+        return
 
-  const args = msg.content.slice(config.prefix.length).split(' ')
-  const command = args[0]
-  if (command === 'question') {
-    const deck = (args.length > 1) ? args[1] : 'starter'
-    msg.channel.send(questions[deck][Math.floor(Math.random() * questions[deck].length)])
-  }
+    const args = msg.content.slice(config.prefix.length).split(' ')
+    const command = args[0]
+
+    //TODO: more general dispatch
+    if (command === 'question')
+        question.execute(msg, args)
 })
 
 client.login(config.token)
