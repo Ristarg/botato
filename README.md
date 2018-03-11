@@ -10,5 +10,5 @@ A Discord bot that makes conversations easier.
   - [x] Store questions in a preparsed format
   - [x] Move the command out to its own module
   - [ ] Get even more questions
-  - [ ] Make a short alias (because typing `b@@question` everytime is overkill)
+  - [x] Make a short alias (because typing `b@@question` everytime is overkill)
 - [ ] More to come...

@@ -5,13 +5,17 @@ const client = new Discord.Client()
 // utility prelude
 const { log, assertConfig } = require('./util')
 
+// config prelude
 const configPath = './config.json'
 if (!assertConfig(configPath))
     process.exit(1)
 const config = require(configPath)
 
 // modules prelude
-const question = new(require('./question/question'))()
+const modules = {}
+// is it better to load before or after login?
+//TODO: automatic module finder
+modules.question = new(require('./question/question'))()
 
 //TODO: TESTS TESTS TESTS
 
@@ -26,9 +30,10 @@ client.on('message', msg => {
     const args = msg.content.slice(config.prefix.length).split(' ')
     const command = args[0]
 
-    //TODO: more general dispatch
-    if (command === 'question')
-        question.execute(msg, args)
+    const matches = Object.keys(modules).filter(m => m.startsWith(command))
+    if (matches.length == 1)
+        modules[matches[0]].execute(msg, args)
+    //TODO: else
 })
 
 client.login(config.token)
