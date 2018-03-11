@@ -4,36 +4,31 @@ const readline = require('readline')
 
 const Discord = require("discord.js")
 const client = new Discord.Client()
-const token = 'NDE2MTAwMDQ1NDY1NzE0Njg4.DYJQyQ.AsCItJ0AxCaIhTlX15tLq-yCFws'
 
-const prefix = 'b@@'
+const config = require('./config.json')
 
 const questions = {}
 
 //TODO: refactor out any command functionality, only leave connection, setup and dispatch
+//TODO: if no config exists, generate template config
+//TODO: add logging
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
 
-  questions.deep = []
-
-  const rl = readline.createInterface({
-    input: fs.createReadStream(path.join(__dirname, '/questions/deep.txt')),
-    crlfDelay: Infinity
-  })
-
-  rl.on('line', (line) => {
-    questions.deep.push(line)
-  })
+  questions.starter = require('./questions/starter.json')
+  questions.deep = require('./questions/deep.json')
 })
 
 client.on('message', msg => {
-  if (msg.author.bot || !msg.content.startsWith(prefix)) return
+  if (msg.author.bot || !msg.content.startsWith(config.prefix)) return
 
-  const command = msg.content.slice(3);
+  const args = msg.content.slice(config.prefix.length).split(' ')
+  const command = args[0]
   if (command === 'question') {
-    msg.channel.send(questions.deep[Math.floor(Math.random() * questions.deep.length)])
+    const deck = (args.length > 1) ? args[1] : 'starter'
+    msg.channel.send(questions[deck][Math.floor(Math.random() * questions[deck].length)])
   }
 })
 
-client.login(token)
+client.login(config.token)
