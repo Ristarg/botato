@@ -10,7 +10,8 @@ class Question {
     }
 
     execute(msg, args) {
-        const deck = (args.length > 1) ? args[1] : 'starter'
+        //FIXME: check for deck existence
+        const deck = (args.length > 1 && (args[1] in Object.keys(this.questions))) ? args[1] : 'starter'
         msg.channel.send(pickRandom(this.questions[deck]))
     }
 }
