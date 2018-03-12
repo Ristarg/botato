@@ -15,9 +15,12 @@ class ModuleBase {
 
     execute(msg, args) {
         //MAYBE: shorthands similar to main dispatcher? some other solution?
-        if (args.length > 0 && args[0] in this.handlers) {
-            args.shift() // unpack subframe
-            this[args[0]](msg, args)
+        if (args.length > 0 && this.handlers.includes(args[0])) {
+            // unpack subframe
+            const handler = args[0]
+            args.shift()
+
+            this[handler](msg, args)
         } else { // pass everything to default handler
             this[this.default](msg, args)
         }
