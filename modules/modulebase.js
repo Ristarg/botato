@@ -4,7 +4,7 @@ class ModuleBase {
         if (new.target === ModuleBase)
             throw new TypeError('Cannot construct ModuleBase instances directly')
 
-        // get command handlers
+        // register command handlers
         this.handlers = Object
             .getOwnPropertyNames(Object.getPrototypeOf(this))
             .filter(it => it !== 'constructor' &&
@@ -14,12 +14,13 @@ class ModuleBase {
     }
 
     execute(msg, args) {
-        const subcommand = (args.length > 1) ? args[1] : this.default
-        const matches = this.handlers.filter(m => m.startsWith(subcommand))
-
-        if (matches.length == 1)
-            this[matches[0]](msg, args)
-        //TODO: else
+        //MAYBE: shorthands similar to main dispatcher? some other solution?
+        if (args.length > 0 && args[0] in this.handlers) {
+            args.shift() // unpack subframe
+            this[args[0]](msg, args)
+        } else { // pass everything to default handler
+            this[this.default](msg, args)
+        }
     }
 }
 

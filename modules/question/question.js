@@ -9,14 +9,16 @@ class Question extends ModuleBase {
         super()
         this.decks = {}
 
-        const dir = path.join(__dirname, './decks')
+        const decksDir = path.join(__dirname, './decks')
 
-        fs.readdirSync(dir).forEach(file => {
+        // load decks
+        //TODO: make pretty
+        fs.readdirSync(decksDir).forEach(file => {
             //TODO: check if is a dir
             //TODO: validate JSON, handle malformed JSON
             if (file.endsWith('.json')) {
                 const name = file.replace('.json', '')
-                this.decks[name] = require(path.join(dir, file))
+                this.decks[name] = require(path.join(decksDir, file))
             }
         })
     }
@@ -27,7 +29,7 @@ class Question extends ModuleBase {
         //TODO: get question by keyword
         //TODO: get question by index
         //TODO: notify on deck miss?
-        const deck = (args.length > 1 && (args[1] in this.decks)) ? args[1] : 'starter'
+        const deck = (args.length > 0 && args[0] in this.decks) ? args[0] : 'starter'
         const [question, idx] = pickRandom(this.decks[deck])
         const out = `:thinking: | __**${deck}#${idx}**__\n${question}`
         msg.channel.send(out)

@@ -6,7 +6,7 @@ function log(msg) {
     //TODO: log to file
 }
 
-//TODO: schema checking maybe?
+//MAYBE: schema checking?
 function assertConfig(path) {
     if (!fs.existsSync(path)) {
         log('Config file not found. Generating...')

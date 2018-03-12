@@ -13,21 +13,24 @@ const modules = {}
 //TODO: automatic module finder
 modules.question = new(require('./modules/question/question'))()
 
-//TODO: TESTS TESTS TESTS
+//TEST: TESTS TESTS TESTS
 
 client.on('ready', () => {
     log(`Logged in as ${client.user.tag}!`)
 })
 
 client.on('message', msg => {
-    //TODO: allow bot messages in testing environment (for e2e tests)
+    //TEST: allow bot messages in testing environment (for e2e tests)
     if (!msg.content.startsWith(config.prefix) || msg.author.bot)
         return
 
     const args = msg.content.slice(config.prefix.length).split(' ')
-    const command = args[0]
 
-    //TODO: non-contiguous matching?
+    // unpack the command "frame"
+    const command = args[0]
+    args.shift()
+
+    //MAYBE: non-contiguous matching?
     const matches = Object.keys(modules).filter(m => m.startsWith(command))
 
     // if input is unambiguous, execute matched command
