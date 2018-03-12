@@ -9,11 +9,12 @@ class ModuleBase {
             .getOwnPropertyNames(Object.getPrototypeOf(this))
             .filter(it => it !== 'constructor' &&
                 !it.startsWith('_')) // don't include ctor and private methods
+
+        this.default = this.handlers[0]
     }
 
     execute(msg, args) {
-        // TODO: get default handler from module ctor instead of hardcoded
-        const subcommand = (args.length > 1) ? args[1] : 'default'
+        const subcommand = (args.length > 1) ? args[1] : this.default
         const matches = this.handlers.filter(m => m.startsWith(subcommand))
 
         if (matches.length == 1)

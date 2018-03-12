@@ -7,7 +7,7 @@ const { pickRandom } = require('../../util')
 class Question extends ModuleBase {
     constructor() {
         super()
-        this.questions = {}
+        this.decks = {}
 
         const dir = path.join(__dirname, './decks')
 
@@ -16,19 +16,19 @@ class Question extends ModuleBase {
             //TODO: validate JSON, handle malformed JSON
             if (file.endsWith('.json')) {
                 const name = file.replace('.json', '')
-                this.questions[name] = require(path.join(dir, file))
+                this.decks[name] = require(path.join(dir, file))
             }
         })
     }
 
-    default(msg, args) {
+    random(msg, args) {
         //TODO: usage cooldown
         //TODO: guarantee of not repeating questions
         //TODO: get question by keyword
         //TODO: get question by index
         //TODO: notify on deck miss?
-        const deck = (args.length > 1 && (args[1] in this.questions)) ? args[1] : 'starter'
-        const [question, idx] = pickRandom(this.questions[deck])
+        const deck = (args.length > 1 && (args[1] in this.decks)) ? args[1] : 'starter'
+        const [question, idx] = pickRandom(this.decks[deck])
         const out = `:thinking: | __**${deck}#${idx}**__\n${question}`
         msg.channel.send(out)
     }
