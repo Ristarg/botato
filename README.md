@@ -9,6 +9,8 @@ A Discord bot that makes conversations easier.
   - [x] Separate questions by category
   - [x] Store questions in a preparsed format
   - [x] Move the command out to its own module
-  - [ ] Get even more questions
+  - [x] Get even more questions
   - [x] Make a short alias (because typing `b@@question` everytime is overkill)
+  - [ ] User suggested questions
+- [ ] Game of answering questions with pictures only (emoji only?)
 - [ ] More to come...
