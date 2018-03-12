@@ -1,9 +1,12 @@
-const { pickRandom } = require('../util')
 const fs = require('fs')
 const path = require('path')
 
-class Question {
+const ModuleBase = require('../modulebase')
+const { pickRandom } = require('../../util')
+
+class Question extends ModuleBase {
     constructor() {
+        super()
         this.questions = {}
 
         const dir = path.join(__dirname, './decks')
@@ -18,7 +21,9 @@ class Question {
         })
     }
 
-    execute(msg, args) {
+    default(msg, args) {
+        //TODO: usage cooldown
+        //TODO: guarantee of not repeating questions
         //TODO: get question by keyword
         //TODO: get question by index
         //TODO: notify on deck miss?

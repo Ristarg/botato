@@ -1,21 +1,17 @@
-// Discord.js prelude
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
-// utility prelude
 const { log, assertConfig } = require('./util')
 
-// config prelude
 const configPath = './config.json'
 if (!assertConfig(configPath))
     process.exit(1)
 const config = require(configPath)
 
-// modules prelude
 const modules = {}
 // is it better to load before or after login?
 //TODO: automatic module finder
-modules.question = new(require('./question/question'))()
+modules.question = new(require('./modules/question/question'))()
 
 //TODO: TESTS TESTS TESTS
 
