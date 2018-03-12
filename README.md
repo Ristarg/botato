@@ -12,5 +12,7 @@ A Discord bot that makes conversations easier.
   - [x] Get even more questions
   - [x] Make a short alias (because typing `b@@question` everytime is overkill)
   - [ ] User suggested questions
+  - [ ] Get question by id
+  - [ ] Search questions by keywords
 - [ ] Game of answering questions with pictures only (emoji only?)
 - [ ] More to come...

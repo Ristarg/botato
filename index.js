@@ -24,13 +24,17 @@ client.on('ready', () => {
 })
 
 client.on('message', msg => {
+    //TODO: allow bot messages in testing environment (for e2e tests)
     if (!msg.content.startsWith(config.prefix) || msg.author.bot)
         return
 
     const args = msg.content.slice(config.prefix.length).split(' ')
     const command = args[0]
 
+    //TODO: non-contiguous matching?
     const matches = Object.keys(modules).filter(m => m.startsWith(command))
+
+    // if input is unambiguous, execute matched command
     if (matches.length == 1)
         modules[matches[0]].execute(msg, args)
     //TODO: else

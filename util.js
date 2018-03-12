@@ -21,7 +21,8 @@ function assertConfig(path) {
 }
 
 function pickRandom(arr) {
-    return arr[Math.floor(Math.random() * arr.length)]
+    const idx = Math.floor(Math.random() * arr.length)
+    return [arr[idx], idx]
 }
 
 module.exports = { log, assertConfig, pickRandom }
