@@ -2,6 +2,7 @@ const Discord = require('discord.js')
 const { log, isDevEnv } = require('./util')
 
 class Botato extends Discord.Client {
+
     constructor(prefix) {
         super()
 
@@ -16,7 +17,7 @@ class Botato extends Discord.Client {
 
         this.on('message', msg => {
 
-            //FIXME: this probably shouldn't be here
+            //FIXME: this definitely shouldn't be here
             if (msg.content === 'ping')
                 msg.channel.send('pong')
 
@@ -29,16 +30,16 @@ class Botato extends Discord.Client {
             const command = args[0]
             args.shift()
 
-
             //MAYBE: non-contiguous matching?
             const matches = Object.keys(this.modules).filter(m => m.startsWith(command))
 
             // if input is unambiguous, execute matched command
             if (matches.length == 1)
                 this.modules[matches[0]].execute(msg, args)
-            //TODO: else
+            //TODO: else list possible matches
         })
     }
+
 }
 
 module.exports = Botato

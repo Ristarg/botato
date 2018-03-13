@@ -5,6 +5,7 @@ const ModuleBase = require('../modulebase')
 const { pickRandom } = require('../../util')
 
 class Question extends ModuleBase {
+
     constructor() {
         super()
         this.decks = {}
@@ -21,7 +22,7 @@ class Question extends ModuleBase {
                 this.decks[name] = require(path.join(decksDir, file))
             }
         })
-    }
+    }    
 
     random(msg, args) {
         //TODO: usage cooldown
@@ -34,6 +35,7 @@ class Question extends ModuleBase {
         const out = `:thinking: | __**${deck}#${idx}**__\n${question}`
         msg.channel.send(out)
     }
+
 }
 
 module.exports = Question

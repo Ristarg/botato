@@ -11,6 +11,4 @@ const config = require(configPath)
 
 const client = new Botato(config.prefix)
 
-//TEST: TESTS TESTS TESTS
-
 client.login(config.token)

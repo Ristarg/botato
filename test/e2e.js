@@ -16,15 +16,13 @@ describe('E2E tests', function() {
         let otherIsReady = false
 
         function assertDone() {
-            return function() {
-                if (otherIsReady)
-                    done()
-                otherIsReady = true
-            }
+            if (otherIsReady)
+                done()
+            otherIsReady = true
         }
 
-        sut.on('ready', assertDone(sut))
-        e2e.on('ready', assertDone(e2e))
+        sut.on('ready', assertDone)
+        e2e.on('ready', assertDone)
 
         sut.login(config.sutToken) // tater
         e2e.login(config.e2eToken) // potesto
