@@ -1,8 +1,8 @@
 const Discord = require('discord.js')
-const { log } = require('./util')
+const { log, isDevEnv } = require('./util')
 
 class Botato extends Discord.Client {
-    constructor(config) {
+    constructor(prefix) {
         super()
 
         this.modules = {}
@@ -15,15 +15,20 @@ class Botato extends Discord.Client {
         })
 
         this.on('message', msg => {
-            //TEST: allow bot messages in testing environment (for e2e tests)
-            if (!msg.content.startsWith(config.prefix) || msg.author.bot)
+
+            //FIXME: this probably shouldn't be here
+            if (msg.content === 'ping')
+                msg.channel.send('pong')
+
+            if (!msg.content.startsWith(prefix) || msg.author.bot && !isDevEnv)
                 return
 
-            const args = msg.content.slice(config.prefix.length).split(' ')
+            const args = msg.content.slice(prefix.length).split(' ')
 
             // unpack the command "frame"
             const command = args[0]
             args.shift()
+
 
             //MAYBE: non-contiguous matching?
             const matches = Object.keys(this.modules).filter(m => m.startsWith(command))

@@ -1,17 +1,22 @@
 const assert = require('assert')
 const Discord = require('discord.js')
 
+const Botato = require('../src/botato')
+
 const config = require('./testconfig.json')
 
-describe('E2E tests', function () {
-    const sut = new Discord.Client()
+describe('E2E tests', function() {
+    this.slow(2000)
+
+    const sut = new Botato('t@@')
     const e2e = new Discord.Client()
 
-    before(function (done) {
+    before(function(done) {
+        this.timeout(5000)
         let otherIsReady = false
 
         function assertDone() {
-            return function () {
+            return function() {
                 if (otherIsReady)
                     done()
                 otherIsReady = true
@@ -30,16 +35,30 @@ describe('E2E tests', function () {
         e2e.destroy()
     })
 
-    describe('test wiring', function () {
+    describe('test wiring', function() {        
 
-        it('can receive messages', function (done) {
-            sut.on('message', msg => {
-                assert.equal(msg.content, 'ping')
+        afterEach(function() {
+            e2e.removeAllListeners('message')
+        })
+
+        it('can receive messages', function(done) {
+            sut.once('message', msg => {
+                assert.equal(msg.content, 'blah')
                 done()
+            })
+
+            e2e.channels.get(config.textChannel).send('blah')
+        })
+
+        it('can respond to messages', function(done) {
+            e2e.on('message', msg => {
+                if (msg.author.id !== e2e.user.id) {
+                    assert.equal(msg.content, 'pong')
+                    done()
+                }
             })
 
             e2e.channels.get(config.textChannel).send('ping')
         })
-
     })
 })

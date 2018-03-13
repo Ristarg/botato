@@ -9,7 +9,7 @@ if (!assertConfig(configPath))
     process.exit(1)
 const config = require(configPath)
 
-const client = new Botato(config)
+const client = new Botato(config.prefix)
 
 //TEST: TESTS TESTS TESTS
 

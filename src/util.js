@@ -25,4 +25,6 @@ function pickRandom(arr) {
     return [arr[idx], idx]
 }
 
-module.exports = { log, assertConfig, pickRandom }
+const isDevEnv = process.env.NODE_ENV !== 'production' 
+
+module.exports = { log, assertConfig, pickRandom, isDevEnv }
