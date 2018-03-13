@@ -1,9 +1,12 @@
+const path = require('path')
+
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
 const { log, assertConfig } = require('./util')
 
-const configPath = './config.json'
+//FIXME: possibly fragile path resolution
+const configPath = path.resolve('./config.json')
 if (!assertConfig(configPath))
     process.exit(1)
 const config = require(configPath)

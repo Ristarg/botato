@@ -62,3 +62,4 @@ config.json
 
 .vscode/
 package-lock.json
+test/testconfig.json
