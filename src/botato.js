@@ -48,7 +48,7 @@ class Botato extends Discord.Client {
             else
             {
                 //TODO: pretty formatting
-                const matchesStr = matches.map(m => `\t• __${m.slice(0, command.length)}__${m.slice(command.length)}`).join('\n')
+                const matchesStr = matches.map(m => `\t\u2022 __${m.slice(0, command.length)}__${m.slice(command.length)}`).join('\n')
                 msg.reply(`I'm not exactly sure what you mean:\n${matchesStr}`)
             }
         })

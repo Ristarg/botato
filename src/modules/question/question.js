@@ -25,7 +25,7 @@ class Question extends ModuleBase {
     }    
 
     random(msg, args) {
-        //TODO: usage cooldown
+        //MAYBE: usage cooldown
         //TODO: guarantee of not repeating questions
         //TODO: get question by keyword
         //TODO: get question by index
