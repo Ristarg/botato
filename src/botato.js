@@ -1,3 +1,6 @@
+const fs = require('fs')
+const path = require('path')
+
 const Discord = require('discord.js')
 const { log, isDevEnv } = require('./util')
 
@@ -8,8 +11,17 @@ class Botato extends Discord.Client {
 
         this.modules = {}
         // is it better to load before or after login?
-        //TODO: automatic module finder
-        this.modules.question = new(require('./modules/question/question'))()
+        //TODO: make pretty
+        const modulesDir = path.join(__dirname, 'modules')
+        fs.readdirSync(modulesDir).forEach(entry => {
+            const stats = fs.statSync(path.join(modulesDir, entry))
+            if (stats.isDirectory())
+            {
+                const moduleFile = path.join(modulesDir, entry, entry + '.js')
+                if (fs.existsSync(moduleFile))
+                    this.modules[entry] = new (require(moduleFile))()
+            }
+        })        
 
         this.on('ready', () => {
             log(`Logged in as ${this.user.tag}!`)
