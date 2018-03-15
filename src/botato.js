@@ -45,7 +45,7 @@ class Botato extends Discord.Client {
             {
                 this.modules[matches[0]].execute(msg, args)
             }
-            else
+            else if (matches.length > 1)
             {
                 //TODO: pretty formatting
                 const matchesStr = matches.map(m => `\t\u2022 __${m.slice(0, command.length)}__${m.slice(command.length)}`).join('\n')
