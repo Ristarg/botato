@@ -47,8 +47,15 @@ class Botato extends Discord.Client {
 
             // if input is unambiguous, execute matched command
             if (matches.length == 1)
+            {
                 this.modules[matches[0]].execute(msg, args)
-            //TODO: else list possible matches
+            }
+            else
+            {
+                //TODO: pretty formatting
+                const matchesStr = matches.map(m => `\t• __${m.slice(0, command.length)}__${m.slice(command.length)}`).join('\n')
+                msg.reply(`I'm not exactly sure what you mean:\n${matchesStr}`)
+            }
         })
     }
 
