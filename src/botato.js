@@ -28,11 +28,6 @@ class Botato extends Discord.Client {
         })
 
         this.on('message', msg => {
-
-            //FIXME: this definitely shouldn't be here
-            if (msg.content === 'ping')
-                msg.channel.send('pong')
-
             if (!msg.content.startsWith(prefix) || msg.author.bot && !isDevEnv)
                 return
 

@@ -56,7 +56,7 @@ describe('E2E tests', function() {
                 }
             })
 
-            e2e.channels.get(config.textChannel).send('ping')
+            e2e.channels.get(config.textChannel).send('t@@sudo ping')
         })
     })
 })

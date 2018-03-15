@@ -14,6 +14,7 @@ class ModuleBase {
     }
 
     //TEST: plumbing
+    //TODO: permissions checking
     execute(msg, args) {
         //MAYBE: shorthands similar to main dispatcher? some other solution?
         if (args.length > 0 && this.handlers.includes(args[0])) {
