@@ -191,7 +191,7 @@ describe('E2E tests', function() {
     describe('Sudo module', function() {
         describe('"ping" handler', function() {
             it('pongs', function(done) {
-                //FIXME: duplicate of "test wiring", but it belongs here
+                //FIXME: duplicate of "test wiring", but it also belongs here
                 e2e.on('message', msg => {
                     if (msg.author.id !== e2e.user.id) {
                         assert.equal(msg.content, 'pong')
