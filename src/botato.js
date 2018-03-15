@@ -28,7 +28,7 @@ class Botato extends Discord.Client {
         })
 
         this.on('message', msg => {
-            if (!msg.content.startsWith(prefix) || msg.author.bot && !isDevEnv)
+            if (!msg.content.startsWith(prefix) || msg.content === prefix || msg.author.bot && !isDevEnv)
                 return
 
             const args = msg.content.slice(prefix.length).split(' ')
