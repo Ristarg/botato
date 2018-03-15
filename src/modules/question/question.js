@@ -36,6 +36,10 @@ class Question extends ModuleBase {
         msg.channel.send(out)
     }
 
+    list(msg) {
+        msg.reply(`available decks are: ${Object.keys(this.decks).map(d => `\`${d}\``).join(', ')}`)
+    }
+
 }
 
 module.exports = Question
